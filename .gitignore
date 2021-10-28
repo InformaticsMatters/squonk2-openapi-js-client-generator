@@ -1,0 +1,14 @@
+.idea
+*.log
+.DS_Store
+node_modules
+dist
+*:Zone.Identifier
+openapi.yaml
+openapi.json
+
+docs
+
+src/model
+src/*/*.ts
+src/*.schemas.ts
