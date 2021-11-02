@@ -34,8 +34,8 @@ runs:
   # Checkout generator repo
   - uses: actions/checkout@v2
     with:
-      repository: 'InformaticsMatters/openapi-js-client-generator'
-      branch: 'main'
+      repository: InformaticsMatters/openapi-js-client-generator
+      branch: main
   - uses: actions/checkout@v2
     with:
       path: "./client"
