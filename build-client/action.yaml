@@ -54,6 +54,7 @@ runs:
   - run: |
       sed -i s/'ORVAL_API_NAME'/'"'${API_NAME}'"'/ orval.config.cjs
       sed -i s/'API_TARGET_NAME'/''${API_TARGET_NAME}''/ orval.config.cjs
+      sed -i s/'API_TARGET_NAME'/''${API_TARGET_NAME}''/ src/index.ts
     shell: bash
   - run: npm ci
     shell: bash
