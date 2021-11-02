@@ -2,6 +2,7 @@
   "version": "0.0.0",
   "author": "Oliver Dudgeon",
   "name": "@squonk/openapi-js-client-generator",
+  "private": false,
   "repository": {
     "type": "git",
     "url": "https://github.com/InformaticsMatters/openapi-js-client-generator"

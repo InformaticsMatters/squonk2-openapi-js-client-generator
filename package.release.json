@@ -2,5 +2,6 @@
   "module": "./index.js",
   "main": "./index.cjs",
   "types": "./index.d.ts",
-  "sideEffects": false
+  "sideEffects": false,
+  "private": false
 }
