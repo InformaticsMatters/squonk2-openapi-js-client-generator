@@ -16,9 +16,6 @@ inputs:
   GITLAB_PROJECT:
     description: 'GitLab project from which to get the OpenAPI file'
     required: true
-  GITLAB_BRANCH:
-    description: 'Name of the branch from which to get the OpenAPI file'
-    required: true
   OPENAPI_FILE:
     description: 'Name of the OpenAPI file'
     required: false
@@ -46,7 +43,7 @@ runs:
       cache: 'npm'
   # Get the openapi.yaml file
   - run: |
-      curl -H "Private-Token: ${GITLAB_API_TOKEN}" ${GITLAB_API}/${GITLAB_PROJECT}/repository/files/${OPENAPI_PATH}%2F${OPENAPI_FILE}/raw?ref=${GITLAB_BRANCH} --output ${OPENAPI_FILE}
+      curl -H "Private-Token: ${GITLAB_API_TOKEN}" ${GITLAB_API}/${GITLAB_PROJECT}/repository/files/${OPENAPI_PATH}%2F${OPENAPI_FILE}/raw?ref=${CI_COMMIT_TAG} --output ${OPENAPI_FILE}
       tail ${OPENAPI_FILE}
       cat ${OPENAPI_FILE} | wc -l
     shell: bash
