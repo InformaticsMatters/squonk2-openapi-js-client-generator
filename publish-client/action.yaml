@@ -15,7 +15,7 @@ runs:
     shell: bash
   - run: |
       cp client/README.md dist/README.md
-      cp client/LICENSE.md dist/LICENSE
+      cp client/LICENSE dist/LICENSE
       cd dist
       npx -y release-it --ci ${CI_COMMIT_TAG}
     shell: bash
