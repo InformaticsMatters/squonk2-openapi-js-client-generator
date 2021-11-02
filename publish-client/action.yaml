@@ -29,6 +29,7 @@ runs:
       cp client/LICENSE dist/LICENSE
       cd dist
       head package.json
+      git remote set-url origin $GITHUB_WORKSPACE
       npx -y release-it --npm.skipChecks --ci ${{ inputs.CI_COMMIT_TAG}}
     shell: bash
     env:
