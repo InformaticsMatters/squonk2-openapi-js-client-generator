@@ -21,4 +21,4 @@ runs:
       npx -y release-it --npm.skipChecks --ci ${{ inputs.CI_COMMIT_TAG}}
     shell: bash
     env:
-      NPM_TOKEN: ${{ secrets.NPM_TOKEN }}
+      NPM_TOKEN: ${{ env.NPM_TOKEN }}
