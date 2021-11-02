@@ -9,24 +9,6 @@ inputs:
   API_TARGET_NAME:
     description: 'API name to use for the schemas output target'
     required: true
-  GITLAB_API:
-    description: 'GitLab API endpoint'
-    required: false
-    default: https://gitlab.com/api/v4/projects
-  GITLAB_API_TOKEN:
-    description: 'Token for the GitLab API'
-    required: true
-  GITLAB_PROJECT:
-    description: 'GitLab project from which to get the OpenAPI file'
-    required: true
-  OPENAPI_FILE:
-    description: 'Name of the OpenAPI file'
-    required: false
-    default: openapi.yaml
-  OPENAPI_PATH:
-    description: 'Path to the OpenAPI file'
-    required: false
-    default: app%2Fopenapi
 
 runs:
   using: 'composite'
@@ -55,9 +37,9 @@ runs:
   - run: cat package.json client/package.override.json | json --deep-merge | tee package.json
     shell: bash
   - run: |
-      sed -i s/'ORVAL_API_NAME'/'"'${API_NAME}'"'/ orval.config.cjs
-      sed -i s/'API_TARGET_NAME'/''${API_TARGET_NAME}''/ orval.config.cjs
-      sed -i s/'API_TARGET_NAME'/${API_TARGET_NAME}/ src/index.ts
+      sed -i s/'ORVAL_API_NAME'/'"'${{ API_NAME }}'"'/ orval.config.cjs
+      sed -i s/'API_TARGET_NAME'/''${{ API_TARGET_NAME }}''/ orval.config.cjs
+      sed -i s/'API_TARGET_NAME'/${{ API_TARGET_NAME }}/ src/index.ts
     shell: bash
   - run: npm ci
     shell: bash
