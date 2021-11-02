@@ -11,7 +11,7 @@ runs:
   using: 'composite'
   steps:
   - run: |
-      cat package.json client/package.release.json | json --deep-merge | tee dist/package.json
+      cat package.json package.release.json | json --deep-merge | tee dist/package.json
     shell: bash
   - run: |
       cp client/README.md dist/README.md
