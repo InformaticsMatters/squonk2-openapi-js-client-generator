@@ -10,6 +10,12 @@ inputs:
 runs:
   using: 'composite'
   steps:
+  - uses: actions/setup-node@v2
+    env:
+        NODE_AUTH_TOKEN: ${{ env.NODE_AUTH_TOKEN }}
+    with:
+      node-version: '12.x'
+      registry-url: 'https://registry.npmjs.org'
   - run: |
       cat package.json package.release.json | json --deep-merge | tee dist/package.json
     shell: bash
@@ -20,5 +26,3 @@ runs:
       head package.json
       npx -y release-it --npm.skipChecks --ci ${{ inputs.CI_COMMIT_TAG}}
     shell: bash
-    env:
-      NODE_AUTH_TOKEN: ${{ env.NODE_AUTH_TOKEN }}
