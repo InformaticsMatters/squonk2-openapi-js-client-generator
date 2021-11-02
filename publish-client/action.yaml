@@ -17,5 +17,5 @@ runs:
       cp client/README.md dist/README.md
       cp client/LICENSE dist/LICENSE
       cd dist
-      npx -y release-it --npm.skipChecks --ci ${CI_COMMIT_TAG}
+      npx -y release-it --npm.skipChecks --ci ${{ inputs.CI_COMMIT_TAG}}
     shell: bash
