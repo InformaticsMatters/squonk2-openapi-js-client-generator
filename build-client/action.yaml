@@ -59,6 +59,7 @@ runs:
     shell: bash
   - run: |
       npm run orval
+      ls dist/
       node setup-entrypoints.js
     shell: bash
 
