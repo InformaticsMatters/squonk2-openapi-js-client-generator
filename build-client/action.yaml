@@ -6,6 +6,9 @@ inputs:
   API_NAME:
     description: 'Name of the API'
     required: true
+  API_TARGET_NAME:
+    description: 'API name to use for the schemas output target'
+    required: true
   GITLAB_API:
     description: 'GitLab API endpoint'
     required: false
