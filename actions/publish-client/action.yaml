@@ -1,0 +1,21 @@
+name: 'OpenAPI JS Client Generator'
+description: 'Generates and publishes a package and documentation from a source openapi.yaml file.'
+author: 'Oliver Dudgeon'
+
+inputs:
+  CI_COMMIT_TAG:
+    description: "CI Tag to use as the package version"
+    required: true
+
+runs:
+  using: 'composite'
+  steps:
+  - run: |
+      cat package.json client/package.release.json | json --deep-merge | tee dist/package.json
+    shell: bash
+  - run: |
+      cp client/README.md dist/README.md
+      cp client/LICENSE.md dist/LICENSE
+      cd dist
+      npx -y release-it --ci ${CI_COMMIT_TAG}
+    shell: bash

@@ -9,7 +9,6 @@
   "description": "TypeScript client for the Squonk OpenAPI files. Generated from the Open API spec with orval. Provides React Hooks to fetch data with react-query using Axios under-the-hood.",
   "license": "MIT",
   "type": "module",
-  "sideEffects": false,
   "scripts": {
     "build": "orval --config ./orval.config.cjs && tsup && node setup-entrypoints.js",
     "orval": "orval --config ./orval.config.cjs"
@@ -20,7 +19,7 @@
     "eslint": "^8.1.0",
     "eslint-plugin-prettier": "^4.0.0",
     "js-yaml": "^4.1.0",
-    "orval": "^6.2.3",
+    "orval": "6.2.4",
     "prettier": "2.4.1",
     "react-query": "^3.29.0",
     "tslib": "^2.3.1",
