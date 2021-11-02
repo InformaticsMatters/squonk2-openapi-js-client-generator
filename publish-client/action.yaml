@@ -14,7 +14,7 @@ runs:
     env:
         NODE_AUTH_TOKEN: ${{ env.NODE_AUTH_TOKEN }}
     with:
-      node-version: '12.x'
+      node-version: 16
       registry-url: 'https://registry.npmjs.org'
   - run: |
       cat package.json package.release.json | json --deep-merge | tee dist/package.json
