@@ -26,3 +26,5 @@ runs:
       head package.json
       npx -y release-it --npm.skipChecks --ci ${{ inputs.CI_COMMIT_TAG}}
     shell: bash
+    env:
+      GITHUB_TOKEN : ${{ env.GITHUB_TOKEN }}
