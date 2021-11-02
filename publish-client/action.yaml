@@ -19,6 +19,11 @@ runs:
   - run: |
       cat package.json package.release.json | json --deep-merge | tee dist/package.json
     shell: bash
+  - name: git config
+    shell: bash
+    run: |
+      git config user.name "${GITHUB_ACTOR}"
+      git config user.email "${GITHUB_ACTOR}@users.noreply.github.com"
   - run: |
       cp client/README.md dist/README.md
       cp client/LICENSE dist/LICENSE
