@@ -10,12 +10,10 @@ inputs:
 runs:
   using: 'composite'
   steps:
-  - uses: actions/setup-node@v2
+  - run: npm config set //registry.npmjs.org/:_authToken $NPM_TOKEN
     env:
-        NODE_AUTH_TOKEN: ${{ env.NODE_AUTH_TOKEN }}
-    with:
-      node-version: 16
-      registry-url: 'https://registry.npmjs.org'
+        NPM_TOKEN: ${{ env.NODE_AUTH_TOKEN }}
+    shell: bash
   - run: |
       cat package.json package.release.json | json --deep-merge | tee dist/package.json
     shell: bash
@@ -27,9 +25,9 @@ runs:
   - run: |
       cp client/README.md dist/README.md
       cp client/LICENSE dist/LICENSE
-      cd dist
+      mv dist client
+      cd client/dist
       head package.json
-      git remote set-url origin $GITHUB_WORKSPACE
       npx -y release-it --npm.skipChecks --ci ${{ inputs.CI_COMMIT_TAG}}
     shell: bash
     env:
