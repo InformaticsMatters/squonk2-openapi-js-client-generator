@@ -5,7 +5,7 @@ import yaml from 'js-yaml';
 
 try {
   const doc = yaml.load(fs.readFileSync('./openapi.yaml', 'utf8'));
-  const tags = [...new Set(Object.keys(doc.paths).map((path) => path.split('/')[1]))];
+  const tags = doc.tags.map((tag) => tag.name);
 
   tags.forEach((tag) => {
     fs.writeFileSync(

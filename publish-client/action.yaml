@@ -1,11 +1,6 @@
-name: 'OpenAPI JS Client Generator'
-description: 'Generates and publishes a package and documentation from a source openapi.yaml file.'
+name: 'Publish Generated Client'
+description: 'Publishes a generated NPM package to NPM and GitHub'
 author: 'Oliver Dudgeon'
-
-inputs:
-  CI_COMMIT_TAG:
-    description: "CI Tag to use as the package version"
-    required: true
 
 runs:
   using: 'composite'
@@ -13,7 +8,7 @@ runs:
   - name: NPM Config
     run: npm config set //registry.npmjs.org/:_authToken $NPM_TOKEN
     env:
-        NPM_TOKEN: ${{ env.NODE_AUTH_TOKEN }}
+      NPM_TOKEN: ${{ env.NODE_AUTH_TOKEN }}
     shell: bash
   - name: Prepare package.json
     run: |
@@ -31,7 +26,7 @@ runs:
       git config user.name "${GITHUB_ACTOR}"
       git config user.email "${GITHUB_ACTOR}@users.noreply.github.com"
       head package.json
-      npx -y release-it --npm.skipChecks --ci ${{ inputs.CI_COMMIT_TAG}}
+      npx -y release-it --npm.skipChecks --ci $CI_COMMIT_TAG
     shell: bash
     env:
       GITHUB_TOKEN : ${{ env.GITHUB_TOKEN }}

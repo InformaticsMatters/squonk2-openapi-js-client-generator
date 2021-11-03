@@ -1,5 +1,5 @@
-name: 'OpenAPI JS Client Generator'
-description: 'Generates and publishes a package and documentation from a source openapi.yaml file.'
+name: 'Generate Client'
+description: 'Generates a package from a source openapi.yaml file.'
 author: 'Oliver Dudgeon'
 
 inputs:

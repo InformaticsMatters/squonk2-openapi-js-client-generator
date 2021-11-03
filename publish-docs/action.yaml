@@ -1,0 +1,17 @@
+name: 'Publish Generated Client Docs'
+description: 'Generates and publish docs from the generated client'
+author: 'Oliver Dudgeon'
+
+runs:
+  using: 'composite'
+  steps:
+  - name: TypeDoc
+    shell: bash
+    run: |
+      node setup-typedoc.js
+      npx typedoc --options typedoc.json
+  - name: Deploy
+    uses: peaceiris/actions-gh-pages@v3
+    with:
+      github_token: ${{ env.GITHUB_TOKEN }}
+      publish_dir: ./docs

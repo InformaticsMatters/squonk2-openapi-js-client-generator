@@ -12,3 +12,4 @@ docs
 src/model
 src/*/*.ts
 src/*.schemas.ts
+typedoc.json
