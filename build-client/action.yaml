@@ -34,7 +34,7 @@ runs:
     shell: bash
   - run: npm i -g json
     shell: bash
-  - run: cat package.json client/package.override.json | json --deep-merge | tee package.json
+  - run: cat package.json client/package.json | json --deep-merge | tee package.json
     shell: bash
   - run: |
       sed -i s/'ORVAL_API_NAME'/'"'${{ inputs.API_NAME }}'"'/ orval.config.cjs
