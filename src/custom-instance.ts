@@ -8,7 +8,7 @@
  * Or use 'ky'
  */
 
-import Axios, { AxiosRequestConfig } from 'axios';
+import Axios, { AxiosError, AxiosRequestConfig } from 'axios';
 
 // ? Need the baseUrl or does it default to ''?
 export const AXIOS_INSTANCE = Axios.create({ baseURL: '' });
@@ -48,3 +48,5 @@ export const customInstance = <TReturn>(
 
   return promise;
 };
+
+export type ErrorType<TError> = AxiosError<TError>;
