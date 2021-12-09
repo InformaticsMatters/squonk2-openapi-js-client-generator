@@ -14,7 +14,8 @@ try {
   "module": "./${tag}.js",
   "main": "./${tag}.cjs",
   "types": "./${tag}.d.ts",
-  "sideEffects": false
+  "sideEffects": false,
+  "type": "module"
 }`,
       (err) => {
         throw err;

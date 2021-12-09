@@ -18,6 +18,7 @@ runs:
     run: |
       cp client/README.md dist/README.md
       cp client/LICENSE dist/LICENSE
+      cp -a src dist
       mv dist client
     shell: bash
   - name: Publish
