@@ -10,7 +10,6 @@
 
 import Axios, { AxiosError, AxiosRequestConfig } from 'axios';
 
-// ? Need the baseUrl or does it default to ''?
 export const AXIOS_INSTANCE = Axios.create({ baseURL: '' });
 
 /**
