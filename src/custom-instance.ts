@@ -10,7 +10,7 @@
 
 import Axios, { AxiosError, AxiosRequestConfig } from 'axios';
 
-export const AXIOS_INSTANCE = Axios.create({ baseURL: '' });
+export const AXIOS_INSTANCE = Axios.create();
 
 /**
  * Set the access token to be added as the `Authorization: Bearer 'token'` header
