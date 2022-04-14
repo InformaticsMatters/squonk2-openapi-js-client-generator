@@ -4,7 +4,7 @@
 
 Generate a React / TypeScript client from an OpenAPI file. [Orval](https://orval.dev) is used to generate a client from the tagged OpenAPI file. This is fully typed and provides functions to make API calls along with [react-query](https://react-query.tanstack.com/) hooks for _requests_ and _mutations_. Currently Axios is used to make calls but to support features such as Streams we might switch this in the future.
 
-The `operationId`s can be replaced with more useful names by specifying a `x-sematic-name` field along side the `operationId`. These must be unique as they simply replace the `operationId`.
+The `operationId`s can be replaced with more useful names by specifying a `x-sematic-name` field along side the `operationId`. These no longer need to be globally unique but still need to be within a `tag` to avoid a name clash.
 
 ## Build
 
