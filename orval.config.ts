@@ -1,8 +1,13 @@
-module.exports = {
+import { defineConfig } from 'orval';
+
+export default defineConfig({
   // ORVAL_API_NAME below is replaced in the action
   ORVAL_API_NAME: {
     input: {
       target: './openapi.yaml',
+      override: {
+        transformer: './input-transformer.cjs',
+      },
     },
     output: {
       mode: 'tags-split',
@@ -11,7 +16,6 @@ module.exports = {
       prettier: true,
       client: 'react-query',
       override: {
-        operationName: (operation) => operation["x-semantic-name"] || operation.operationId,
         mutator: {
           path: './src/custom-instance.ts',
           name: 'customInstance',
@@ -22,4 +26,4 @@ module.exports = {
       },
     },
   },
-};
+})

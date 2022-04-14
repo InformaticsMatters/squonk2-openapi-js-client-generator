@@ -8,7 +8,7 @@ openapi.json
 .DS_Store
 
 custom-instance.ts
-orval.config.cjs
+orval.config.ts
 setup.js
 tsup.config.ts
 .github

@@ -11,8 +11,8 @@
   "license": "MIT",
   "type": "module",
   "scripts": {
-    "build": "orval --config ./orval.config.cjs && tsup && node setup-entrypoints.js",
-    "orval": "orval --config ./orval.config.cjs"
+    "build": "orval && tsup && node setup-entrypoints.js",
+    "orval": "orval"
   },
   "devDependencies": {
     "@typescript-eslint/eslint-plugin": "5.19.0",

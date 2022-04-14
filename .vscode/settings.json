@@ -8,7 +8,8 @@
     "dependencies",
     "readme",
     "custom-instance",
-    "editor"
+    "editor",
+    "input-transformer"
   ],
   "cSpell.words": [
     "orval",
