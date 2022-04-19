@@ -11,7 +11,7 @@ export default defineConfig({
       // API_TARGET_NAME below is replaced in the action
       target: './src/API_TARGET_NAME.ts',
       prettier: true,
-      client: 'axios',
+      client: 'react-query',
       override: {
         // mutator: {
         //   path: './src/custom-instance.ts',
