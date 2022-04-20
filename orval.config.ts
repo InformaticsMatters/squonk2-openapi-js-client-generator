@@ -13,14 +13,15 @@ export default defineConfig({
       prettier: true,
       client: 'react-query',
       override: {
-        // mutator: {
-        //   path: './src/custom-instance.ts',
-        //   name: 'customInstance',
-        // },
+        operationName: (operation) => operation['x-semantic-name'],
+        mutator: {
+          path: './src/custom-instance.ts',
+          name: 'customInstance',
+        },
         query: {
           useQuery: true,
         },
       },
     },
   },
-})
+});
