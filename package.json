@@ -15,17 +15,17 @@
     "orval": "orval"
   },
   "devDependencies": {
-    "@typescript-eslint/eslint-plugin": "5.19.0",
-    "axios": "0.26.1",
-    "eslint": "8.13.0",
+    "@typescript-eslint/eslint-plugin": "5.25.0",
+    "axios": "0.27.2",
+    "eslint": "8.15.0",
     "eslint-plugin-prettier": "4.0.0",
     "js-yaml": "4.1.0",
-    "orval": "6.7.1",
+    "orval": "6.8.0",
     "prettier": "2.6.2",
-    "react-query": "3.34.19",
-    "tslib": "2.3.1",
-    "tsup": "5.12.5",
-    "typescript": "4.6.3"
+    "react-query": "3.39.0",
+    "tslib": "2.4.0",
+    "tsup": "5.12.8",
+    "typescript": "4.6.4"
   },
   "peerDependencies": {
     "axios": ">=0.23",
