@@ -15,13 +15,13 @@
     "orval": "orval"
   },
   "devDependencies": {
-    "@typescript-eslint/eslint-plugin": "5.25.0",
+    "@typescript-eslint/eslint-plugin": "5.30.6",
     "axios": "0.27.2",
-    "eslint": "8.15.0",
-    "eslint-plugin-prettier": "4.0.0",
+    "eslint": "8.20.0",
+    "eslint-plugin-prettier": "4.2.1",
     "js-yaml": "4.1.0",
     "orval": "6.8.0",
-    "prettier": "2.6.2",
+    "prettier": "2.7.1",
     "react-query": "3.39.0",
     "tslib": "2.4.0",
     "tsup": "5.12.8",
