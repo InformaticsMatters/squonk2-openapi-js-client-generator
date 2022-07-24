@@ -41,11 +41,13 @@ runs:
       sed -i s/'API_TARGET_NAME'/''${{ inputs.API_TARGET_NAME }}''/ orval.config.ts
       sed -i s/'API_TARGET_NAME'/${{ inputs.API_TARGET_NAME }}/ src/index.ts
     shell: bash
-  - run: npm ci
+  - run: npm i
     shell: bash
   - run: npm i orval
     shell: bash
   - run: npm i react-query
+    shell: bash
+  - run: npm i axios
     shell: bash
   - run: |
       npm exec orval
