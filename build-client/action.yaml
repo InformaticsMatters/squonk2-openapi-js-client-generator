@@ -32,7 +32,7 @@ runs:
       tail ${OPENAPI_FILE}
       cat ${OPENAPI_FILE} | wc -l
     shell: bash
-  - run: npm i -g json
+  - run: npm i --location=global json
     shell: bash
   - run: cat package.json client/package.json | json --deep-merge | tee package.json
     shell: bash
@@ -42,6 +42,10 @@ runs:
       sed -i s/'API_TARGET_NAME'/${{ inputs.API_TARGET_NAME }}/ src/index.ts
     shell: bash
   - run: npm ci
+    shell: bash
+  - run: npm i orval
+    shell: bash
+  - run: npm i react-query
     shell: bash
   - run: |
       npm exec orval
