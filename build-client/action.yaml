@@ -41,6 +41,7 @@ runs:
       sed -i s/'API_TARGET_NAME'/${{ inputs.API_TARGET_NAME }}/ src/index.ts
     shell: bash
   - run: yarn
+    shell: bash
   - run: |
       yarn orval
       yarn tsup
