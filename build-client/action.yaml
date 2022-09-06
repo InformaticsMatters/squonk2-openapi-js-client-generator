@@ -18,7 +18,7 @@ runs:
     with:
       repository: InformaticsMatters/openapi-js-client-generator
       branch: main
-  - run: ls yarn.lock
+  - run: cat yarn.lock
     shell: bash
   - uses: actions/checkout@v3
     with:
