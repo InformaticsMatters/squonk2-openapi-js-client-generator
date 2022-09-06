@@ -39,12 +39,34 @@ runs:
     shell: bash
   - run: cat package.json client/package.json | json --deep-merge | tee package.json
     shell: bash
+  - run: cat package.json
+    shell: bash
   - run: |
       sed -i s/'ORVAL_API_NAME'/'"'${{ inputs.API_NAME }}'"'/ orval.config.ts
       sed -i s/'API_TARGET_NAME'/''${{ inputs.API_TARGET_NAME }}''/ orval.config.ts
       sed -i s/'API_TARGET_NAME'/${{ inputs.API_TARGET_NAME }}/ src/index.ts
     shell: bash
-  - run: yarn
+  - run: yarn add @typescript-eslint/eslint-plugin@5.30.6
+    shell: bash
+  - run: yarn add axios@0.27.2
+    shell: bash
+  - run: yarn add eslint@8.20.0
+    shell: bash
+  - run: yarn add eslint-plugin-prettier@4.2.1
+    shell: bash
+  - run: yarn add js-yaml@4.1.0
+    shell: bash
+  - run: yarn add orval@6.9.1
+    shell: bash
+  - run: yarn add prettier@2.7.1
+    shell: bash
+  - run: yarn add react-query@3.39.2
+    shell: bash
+  - run: yarn add tslib@2.4.0
+    shell: bash
+  - run: yarn add tsup@6.1.3
+    shell: bash
+  - run: yarn add typescript@4.6.4
     shell: bash
   - run: pwd
     shell: bash
