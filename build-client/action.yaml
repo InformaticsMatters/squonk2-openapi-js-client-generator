@@ -44,9 +44,11 @@ runs:
     shell: bash
   - run: yarn
     shell: bash
+  - run: ls ./node_modules/.bin
+    shell: bash
   - run: |
-      yarn orval
-      yarn tsup
+      ./node_modules/.bin/orval
+      ./node_modules/.bin/tsup
       ls dist/
       node setup-entrypoints.js
     shell: bash
