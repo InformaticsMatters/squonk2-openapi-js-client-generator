@@ -14,11 +14,13 @@ runs:
   using: 'composite'
   steps:
   # Checkout generator repo
-  - uses: actions/checkout@v2
+  - uses: actions/checkout@v3
     with:
       repository: InformaticsMatters/openapi-js-client-generator
       branch: main
-  - uses: actions/checkout@v2
+  - run: ls yarn.lock
+    shell: bash
+  - uses: actions/checkout@v3
     with:
       path: "./client"
   # We need Node 16
