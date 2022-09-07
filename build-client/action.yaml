@@ -18,11 +18,11 @@ runs:
     with:
       repository: InformaticsMatters/openapi-js-client-generator
       branch: main
-  - run: cat yarn.lock
-    shell: bash
   - uses: actions/checkout@v3
     with:
       path: "./client"
+  - run: cat package.json
+    shell: bash
   # We need Node 16
   - uses: actions/setup-node@v2
     with:
