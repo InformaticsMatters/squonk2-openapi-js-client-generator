@@ -33,6 +33,8 @@ runs:
       tail ${OPENAPI_FILE}
       cat ${OPENAPI_FILE} | wc -l
     shell: bash
+  - run: cat package.json
+    shell: bash
   - run: jq -s '.[0] * .[1]' package.json client/package.json | tee package.json
     shell: bash
   - run: cat package.json
