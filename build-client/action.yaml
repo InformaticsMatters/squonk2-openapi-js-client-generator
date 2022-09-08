@@ -21,7 +21,7 @@ runs:
   - uses: actions/checkout@v3
     with:
       path: "./client"
-  - run: cat package.json
+  - run: ls -la
     shell: bash
   # We need Node 16
   - uses: actions/setup-node@v2
