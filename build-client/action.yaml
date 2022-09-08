@@ -35,7 +35,7 @@ runs:
     shell: bash
   - run: cat package.json
     shell: bash
-  - run: node merge-package-json.js | tee package.json
+  - run: node merge-package-json.mjs | tee package.json
     shell: bash
   - run: cat package.json
     shell: bash
