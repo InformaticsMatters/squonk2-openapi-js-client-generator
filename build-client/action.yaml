@@ -37,6 +37,8 @@ runs:
     shell: bash
   - run: cat client/package.json
     shell: bash
+  - run: jq --version
+    shell: bash
   - run: jq -s '.[0] * .[1]' package.json client/package.json | tee package.json
     shell: bash
   - run: cat package.json
