@@ -11,6 +11,7 @@
   "license": "MIT",
   "type": "module",
   "scripts": {
+    "orval": "orval",
     "build": "tsup && node setup-entrypoints.js"
   },
   "devDependencies": {
