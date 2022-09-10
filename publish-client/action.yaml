@@ -12,7 +12,7 @@ runs:
     shell: bash
   - name: Prepare package.json
     run: |
-      cat package.json package.release.json | json --deep-merge | tee dist/package.json
+      jq -s '.[0] * .[1]' package.json package.release.json | tee dist/package.json
     shell: bash
   - name: Prepare Build
     run: |

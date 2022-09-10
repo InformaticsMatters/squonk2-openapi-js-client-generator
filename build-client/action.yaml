@@ -21,8 +21,6 @@ runs:
   - uses: actions/checkout@v3
     with:
       path: "./client"
-  - run: ls -la
-    shell: bash
   # We need Node 16
   - uses: actions/setup-node@v2
     with:
@@ -33,26 +31,20 @@ runs:
       tail ${OPENAPI_FILE}
       cat ${OPENAPI_FILE} | wc -l
     shell: bash
-  - run: cat package.json
-    shell: bash
-  - run: node merge-package-json.mjs | tee package.json.tmp
+  - run: jq -s '.[0] * .[1]' ./package.json ./client/package.json | package.json.tmp
     shell: bash
   - run: mv package.json.tmp package.json
     shell: bash
-  - run: cat package.json
-    shell: bash
-  - run: yarn
+  - run: npm i
     shell: bash
   - run: |
       sed -i s/'ORVAL_API_NAME'/'"'${{ inputs.API_NAME }}'"'/ orval.config.ts
       sed -i s/'API_TARGET_NAME'/''${{ inputs.API_TARGET_NAME }}''/ orval.config.ts
       sed -i s/'API_TARGET_NAME'/${{ inputs.API_TARGET_NAME }}/ src/index.ts
     shell: bash
-  - run: ls ./node_modules/.bin
-    shell: bash
   - run: |
-      ./node_modules/.bin/orval
-      ./node_modules/.bin/tsup
+      npm run orval
+      npm run tsup
       ls dist/
       node setup-entrypoints.js
     shell: bash
