@@ -31,7 +31,7 @@ runs:
       tail ${OPENAPI_FILE}
       cat ${OPENAPI_FILE} | wc -l
     shell: bash
-  - run: jq -s '.[0] * .[1]' ./package.json ./client/package.json | package.json.tmp
+  - run: jq -s '.[0] * .[1]' ./package.json ./client/package.json | tee package.json.tmp
     shell: bash
   - run: mv package.json.tmp package.json
     shell: bash
