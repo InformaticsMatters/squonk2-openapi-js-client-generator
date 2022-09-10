@@ -44,7 +44,7 @@ runs:
     shell: bash
   - run: |
       npm run orval
-      npm run tsup
+      npm run build
       ls dist/
       node setup-entrypoints.js
     shell: bash
