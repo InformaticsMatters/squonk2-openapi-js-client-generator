@@ -1,6 +1,11 @@
 {
   "$schema": "https://docs.renovatebot.com/renovate-schema.json",
   "extends": [
-    "config:base"
+    ":disableRateLimiting",
+    "config:js-app",
+    ":semanticCommitTypeAll(chore)"
+  ],
+  "labels": [
+    "dependencies"
   ]
 }
