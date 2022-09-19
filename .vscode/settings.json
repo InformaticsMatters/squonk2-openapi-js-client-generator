@@ -19,5 +19,4 @@
   "[yaml]": {
     "editor.formatOnSave": false,
   },
-  "iridium.npm.packageManager": "yarn"
 }
