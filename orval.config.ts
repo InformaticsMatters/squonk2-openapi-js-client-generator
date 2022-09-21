@@ -5,6 +5,7 @@ export default defineConfig({
   ORVAL_API_NAME: {
     input: {
       target: './openapi.yaml',
+      validation: false,
     },
     output: {
       mode: 'tags-split',
