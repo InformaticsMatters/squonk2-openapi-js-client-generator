@@ -5,7 +5,7 @@
   "private": false,
   "repository": {
     "type": "git",
-    "url": "https://github.com/InformaticsMatters/openapi-js-client-generator"
+    "url": "https://github.com/InformaticsMatters/squonk2-openapi-js-client-generator"
   },
   "description": "TypeScript client for the Squonk OpenAPI files. Generated from the Open API spec with orval. Provides React Hooks to fetch data with react-query using Axios under-the-hood.",
   "license": "MIT",
