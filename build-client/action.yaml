@@ -44,6 +44,7 @@ runs:
     shell: bash
   - run: |
       npm run orval
+      cat src/${{ inputs.API_NAME }}.schema.ts
       npm run build
       ls dist/
       node setup-entrypoints.js
