@@ -21,6 +21,11 @@ export default defineConfig({
         },
         query: {
           useQuery: true,
+          queryOptions: {
+            path: './src/queryMutator.ts',
+            name: 'queryMutator',
+            // default: true,
+          },
         },
       },
     },
