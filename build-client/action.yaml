@@ -41,7 +41,6 @@ runs:
       sed -i s/'ORVAL_API_NAME'/'"'${{ inputs.API_NAME }}'"'/ orval.config.ts
       sed -i s/'API_TARGET_NAME'/''${{ inputs.API_TARGET_NAME }}''/ orval.config.ts
       sed -i s/'API_TARGET_NAME'/${{ inputs.API_TARGET_NAME }}/ src/index.ts
-      sed -i s/'ORVAL_API_NAME'/'"'${{ inputs.API_NAME }}'"'/ src/queryMutator.ts
     shell: bash
   - run: |
       npm run orval
