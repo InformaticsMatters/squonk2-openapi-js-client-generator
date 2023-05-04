@@ -46,6 +46,7 @@ runs:
   - run: |
       npm run orval
       cat src/${{ inputs.API_TARGET_NAME }}.schemas.ts
+      node morph-query-keys.js ${{ inputs.API_TARGET_NAME }}
       npm run build
       ls dist/
       node setup-entrypoints.js
