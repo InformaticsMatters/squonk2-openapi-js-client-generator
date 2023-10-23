@@ -22,7 +22,7 @@ runs:
     with:
       path: "./client"
   # We need Node 16
-  - uses: actions/setup-node@v3
+  - uses: actions/setup-node@v4
     with:
       node-version: 16
   # Get the openapi.yaml file
