@@ -23,7 +23,7 @@ runs:
     shell: bash
   - name: Publish
     run: |
-      cd client
+      cd client/dist
       ls
       cat package.json
       git config user.name "${GITHUB_ACTOR}"
