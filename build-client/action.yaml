@@ -24,7 +24,7 @@ runs:
   # We need Node 16
   - uses: actions/setup-node@v4
     with:
-      node-version: 16
+      node-version: 18
   # Get the openapi.yaml file
   - run: |
       curl -H "Private-Token: ${GITLAB_API_TOKEN}" ${GITLAB_API}/${GITLAB_PROJECT}/repository/files/${OPENAPI_PATH}%2F${OPENAPI_FILE}/raw?ref=${CI_COMMIT_TAG} --output ${OPENAPI_FILE}
