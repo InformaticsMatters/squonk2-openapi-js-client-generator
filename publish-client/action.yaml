@@ -24,8 +24,9 @@ runs:
   - name: Publish
     run: |
       cd client/dist
-      ls
-      cat package.json
+      jq --arg tag "$CI_COMMIT_TAG" '.version = $tag' package.json > temp.json
+      mv temp.json package.json
+      head package.json
       git config user.name "${GITHUB_ACTOR}"
       git config user.email "${GITHUB_ACTOR}@users.noreply.github.com"
       npm publish
