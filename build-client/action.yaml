@@ -14,15 +14,15 @@ runs:
   using: 'composite'
   steps:
   # Checkout generator repo
-  - uses: actions/checkout@v3
+  - uses: actions/checkout@v4
     with:
       repository: InformaticsMatters/openapi-js-client-generator
       branch: main
-  - uses: actions/checkout@v3
+  - uses: actions/checkout@v4
     with:
       path: "./client"
   # We need Node 16
-  - uses: actions/setup-node@v3
+  - uses: actions/setup-node@v4
     with:
       node-version: 16
   # Get the openapi.yaml file
