@@ -24,9 +24,10 @@ runs:
   - name: Publish
     run: |
       cd client
+      ls
+      cat package.json
       git config user.name "${GITHUB_ACTOR}"
       git config user.email "${GITHUB_ACTOR}@users.noreply.github.com"
-      head package.json
       npm publish
     shell: bash
     env:
