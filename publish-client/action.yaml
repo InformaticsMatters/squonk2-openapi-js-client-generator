@@ -27,6 +27,7 @@ runs:
       git config user.name "${GITHUB_ACTOR}"
       git config user.email "${GITHUB_ACTOR}@users.noreply.github.com"
       head package.json
+      cd dist
       npm publish
     shell: bash
     env:
