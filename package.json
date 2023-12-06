@@ -26,7 +26,7 @@
     "ts-morph": "20.0.0",
     "tslib": "2.6.2",
     "tsup": "7.2.0",
-    "typescript": "5.2.2"
+    "typescript": "5.3.3"
   },
   "peerDependencies": {
     "@tanstack/react-query": ">=4",
