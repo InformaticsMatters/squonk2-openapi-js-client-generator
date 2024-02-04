@@ -22,7 +22,7 @@
     "eslint-plugin-prettier": "5.0.1",
     "js-yaml": "4.1.0",
     "orval": "6.20.0",
-    "prettier": "3.1.0",
+    "prettier": "3.2.5",
     "ts-morph": "20.0.0",
     "tslib": "2.6.2",
     "tsup": "7.2.0",
