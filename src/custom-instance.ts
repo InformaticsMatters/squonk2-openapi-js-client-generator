@@ -39,10 +39,9 @@ export const customInstance = <TReturn>(
     ({ data }) => data,
   );
 
-  // Promise doesn't have a cancel method but react-query requires this method to make cancellations general.
-  // This can either be a any assertion or a @ts-ignore comment.
-  (promise as any).cancel = () => {
-    source.cancel('Query was cancelled by React Query');
+  // @ts-expect-error need to add a cancel method to the promise
+  promise.cancel = () => {
+    source.cancel('Query was cancelled');
   };
 
   return promise;
