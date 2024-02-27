@@ -17,9 +17,9 @@ The exports can be accessed as follows:
 - The `customInstance` used to make calls is exported in the case where the exported API doesn't allow certain features.
 - *All* the exported types are only exported from here (limited by the output of orval but you should import types separately with `import type {} from ''` regardless).
 
-### From the subEntry points, the `react-query` exports can be imported.
+### From the sub-entry points, the `react-query` exports can be imported.
 
-This will be the standard output of `Orval` with `react-query` These will be the `x-semantic-name` fields specified in the OpenAPI. In addition the hooks will of course be prefixed by `use` and converted to `camelCase`. Each `useQuery` hook will also have a `get${camelCase(operationId)}` function that takes the same request params and body to generate a query key.
+This will be the standard output of `Orval` with `react-query` These will be the `x-semantic-name` fields specified in the OpenAPI. In addition the hooks will of course be prefixed by `use` and converted to `camelCase`. Each `useQuery` hook will also have a `get${camelCase(operationId)}` function that takes the same request params and body to generate a query key. Additionally, suspense queries are generated for `<Suspense></Suspense>` boundaries.
 
 ## Docs
 
