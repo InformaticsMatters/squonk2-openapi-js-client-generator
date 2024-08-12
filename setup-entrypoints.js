@@ -3,25 +3,27 @@
 import fs from 'fs';
 import yaml from 'js-yaml';
 
-try {
-  const doc = yaml.load(fs.readFileSync('./openapi.yaml', 'utf8'));
-  const tags = doc.tags.map((tag) => tag.name);
+const doc = yaml.load(fs.readFileSync('./openapi.yaml', 'utf8'));
+const tags = doc.tags.map((tag) => tag.name);
 
-  tags.forEach((tag) => {
+console.log(tags);
+
+tags.forEach((tag) => {
+  try {
     fs.writeFileSync(
       `./dist/${tag}/package.json`,
       `{
-  "module": "./${tag}.js",
-  "main": "./${tag}.cjs",
-  "types": "./${tag}.d.ts",
-  "sideEffects": false,
-  "type": "module"
-}`,
-      (err) => {
-        throw err;
-      },
+    "module": "./${tag}.js",
+    "main": "./${tag}.cjs",
+    "types": "./${tag}.d.ts",
+    "sideEffects": false,
+    "type": "module"
+  }`,
     );
-  });
-} catch (e) {
-  console.error(e);
-}
+  } catch (err) {
+    console.log(
+      `Not created a package.json for ${tag}. The folder might not have been created by orval.`,
+    );
+    console.error(err);
+  }
+});
