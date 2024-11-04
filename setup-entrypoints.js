@@ -22,7 +22,7 @@ tags.forEach((tag) => {
     );
   } catch (err) {
     console.log(
-      `Not created a package.json for ${tag}. The folder might not have been created by orval.`,
+      `Not created a package.json for ${tag}. The folder might not have been created by orval. This is usually ok.`,
     );
     console.error(err);
   }

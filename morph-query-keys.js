@@ -1,12 +1,14 @@
 import { Project, SyntaxKind } from 'ts-morph';
 
+const NO_CHECK_COMMENT = '// @ts-nocheck';
+
 const project = new Project({
   tsConfigFilePath: './tsconfig.json',
   skipAddingFilesFromTsConfig: true,
 });
 
 // Add all .ts files inside ./src (this includes index.ts, custom-instance.ts etc.)
-project.addSourceFilesAtPaths('./src/**/*.ts');
+project.addSourceFilesAtPaths(['./src/**/*.ts', '!./src/index.ts', '!./src/custom-instance.ts']);
 
 // We will filter out all of the extra ones (index.ts, custom-instance.ts etc.) by the number of "/"
 // in the full file path. I.e. the ones we wan't to keep have one extra "/"
@@ -16,6 +18,11 @@ const maxParts = Math.max(...project.getSourceFiles().map(getNumberOfParts));
 const apiName = process.argv.at(-1); // ! probably requires a recent NodeJS version
 
 for (const apiFile of project.getSourceFiles()) {
+  const fullText = apiFile.getFullText();
+  if (!fullText.includes(NO_CHECK_COMMENT)) {
+    apiFile.insertStatements(0, NO_CHECK_COMMENT);
+  }
+
   if (getNumberOfParts(apiFile) === maxParts) {
     // get all variables used
     apiFile.getVariableStatements().forEach((variable) => {
