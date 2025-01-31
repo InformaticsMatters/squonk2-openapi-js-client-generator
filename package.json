@@ -15,7 +15,7 @@
     "build": "tsup && node setup-entrypoints.js"
   },
   "devDependencies": {
-    "@tanstack/react-query": "5.24.1",
+    "@tanstack/react-query": "5.66.0",
     "@typescript-eslint/eslint-plugin": "7.1.0",
     "axios": "1.7.4",
     "eslint": "8.57.0",
