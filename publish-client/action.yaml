@@ -10,6 +10,9 @@ runs:
     env:
       NPM_TOKEN: ${{ env.NODE_AUTH_TOKEN }}
     shell: bash
+  - name: Install Semver CLI
+    run: npm install -g semver
+    shell: bash
   - name: Prepare package.json
     run: |
       jq -s '.[0] * .[1]' package.json package.release.json | tee dist/package.json
@@ -24,9 +27,52 @@ runs:
   - name: Publish
     run: |
       cd client/dist
-      jq --arg tag "$CI_COMMIT_TAG" '.version = $tag' package.json > temp.json
+      INPUT_TAG="$CI_COMMIT_TAG"
+      PIPELINE_ID="$CI_PIPELINE_ID"
+      OPENAPI_PATH="../../openapi.yaml" # Assumes openapi.yaml is at the root
+
+      echo "Input Tag: $INPUT_TAG"
+      echo "Pipeline ID: $PIPELINE_ID"
+
+      # Check if openapi.yaml exists
+      if [ ! -f "$OPENAPI_PATH" ]; then
+        echo "Error: OpenAPI spec file not found at $OPENAPI_PATH!"
+        exit 1
+      fi
+
+      # Extract base version (e.g., '4.0') from openapi.yaml info.version
+      OPENAPI_VERSION_LINE=$(grep -E "^\\s*version:\\s*'[0-9]+\\.[0-9]+'" "$OPENAPI_PATH")
+      OPENAPI_VERSION=$(echo "$OPENAPI_VERSION_LINE" | sed -n "s/.*version:\\s*'\\(.*\\)'/\\1/p")
+
+      if [ -z "$OPENAPI_VERSION" ]; then
+        echo "Error: Could not extract 'info.version' (e.g., 'X.Y') from $OPENAPI_PATH"
+        exit 1
+      fi
+
+      # Extract major and minor parts
+      MAJOR=$(echo "$OPENAPI_VERSION" | cut -d. -f1)
+      MINOR=$(echo "$OPENAPI_VERSION" | cut -d. -f2)
+
+      # Validate input tag using semver CLI. Exit code is 0 for valid semver.
+      if semver "$INPUT_TAG" > /dev/null 2>&1; then
+        # Input tag is SemVer compliant, use it directly
+        VERSION="$INPUT_TAG"
+        echo "Input tag '$INPUT_TAG' is valid SemVer. Using version '$VERSION'."
+      else
+        # Input tag is not SemVer, treat as branch/tag name
+        echo "Input tag '$INPUT_TAG' is not valid SemVer. Generating pre-release version."
+        # Sanitize the tag: replace non-alphanumeric/hyphen chars with hyphen
+        SANITIZED_TAG=$(echo "$INPUT_TAG" | sed 's/[^a-zA-Z0-9-]/-/g')
+        # Construct the version string: major.minor.0-tag-pipeline
+        VERSION="${MAJOR}.${MINOR}.0-${SANITIZED_TAG}-${PIPELINE_ID}"
+        echo "Generated version: $VERSION"
+      fi
+
+      # Update package.json version
+      jq --arg version "$VERSION" '.version = $version' package.json > temp.json
       mv temp.json package.json
-      head package.json
+      echo "Updated package.json:"
+      head package.json # Keep for debugging output
       git config user.name "${GITHUB_ACTOR}"
       git config user.email "${GITHUB_ACTOR}@users.noreply.github.com"
       npm publish
