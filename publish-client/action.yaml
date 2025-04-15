@@ -59,6 +59,7 @@ runs:
         VERSION="$INPUT_TAG"
         echo "Input tag '$INPUT_TAG' is valid SemVer. Using version '$VERSION'."
         # Let npm publish determine the tag (latest or pre-release tag)
+        NPM_TAG_ARG=""
       else
         # Input tag is not SemVer, treat as branch/tag name
         echo "Input tag '$INPUT_TAG' is not valid SemVer. Generating pre-release version."
@@ -67,7 +68,8 @@ runs:
         # Construct the version string: major.minor.0-tag.pipeline
         VERSION="${MAJOR}.${MINOR}.0-${SANITIZED_TAG}.${PIPELINE_ID}"
         echo "Generated version: $VERSION"
-        # Publish with a tag derived from the sanitized input tag - npm handles this automatically now
+        # Explicitly publish with a tag derived from the sanitized input tag
+        NPM_TAG_ARG="--tag ${SANITIZED_TAG}"
       fi
 
       # Update package.json version
@@ -77,10 +79,9 @@ runs:
       head package.json # Keep for debugging output
       git config user.name "${GITHUB_ACTOR}"
       git config user.email "${GITHUB_ACTOR}@users.noreply.github.com"
-      echo "Publishing to NPM version '$VERSION'. Tag will be automatically determined by npm."
+      echo "Publishing to NPM version '$VERSION' with tag arguments: '$NPM_TAG_ARG'"
       # Note: The space before $NPM_TAG_ARG is important if it's non-empty
-      # Npm automatically determines the tag (latest for standard, pre-id for pre-releases)
-      npm publish
+      npm publish $NPM_TAG_ARG
     shell: bash
     env:
       GITHUB_TOKEN : ${{ env.GITHUB_TOKEN }}
