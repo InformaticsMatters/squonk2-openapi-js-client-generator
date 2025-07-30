@@ -22,7 +22,11 @@ runs:
       path: "./client"
   - uses: actions/setup-node@v4
     with:
-      node-version: 20
+      node-version: 22
+  # Setup pnpm
+  - uses: pnpm/action-setup@v4
+    with:
+      version: 10.13.1
   # Get the openapi.yaml file
   - run: |
       echo "Fetching OpenAPI file from: ${GITLAB_API}/${GITLAB_PROJECT}/repository/files/${OPENAPI_PATH}%2F${OPENAPI_FILE}/raw?ref=${CI_COMMIT_TAG}"
@@ -34,7 +38,7 @@ runs:
     shell: bash
   - run: mv package.json.tmp package.json
     shell: bash
-  - run: npm i
+  - run: pnpm install
     shell: bash
   - run: |
       sed -i s/'ORVAL_API_NAME'/'"'${{ inputs.API_NAME }}'"'/ orval.config.ts
@@ -42,11 +46,10 @@ runs:
       sed -i s/'API_TARGET_NAME'/${{ inputs.API_TARGET_NAME }}/ src/index.ts
     shell: bash
   - run: |
-      npm run orval
+      pnpm orval
       cat src/${{ inputs.API_TARGET_NAME }}.schemas.ts
       node morph-query-keys.js ${{ inputs.API_TARGET_NAME }}
-      npm run build
+      pnpm build
       ls dist/
       node setup-entrypoints.js
     shell: bash
-

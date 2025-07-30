@@ -6,12 +6,12 @@ runs:
   using: 'composite'
   steps:
   - name: NPM Config
-    run: npm config set //registry.npmjs.org/:_authToken $NPM_TOKEN
+    run: pnpm config set //registry.npmjs.org/:_authToken $NPM_TOKEN
     env:
       NPM_TOKEN: ${{ env.NODE_AUTH_TOKEN }}
     shell: bash
   - name: Install Semver CLI
-    run: npm install -g semver
+    run: pnpm i -g semver
     shell: bash
   - name: Prepare package.json
     run: |
@@ -49,16 +49,12 @@ runs:
         exit 1
       fi
 
-      # Extract major and minor parts
-      MAJOR=$(echo "$OPENAPI_VERSION" | cut -d. -f1)
-      MINOR=$(echo "$OPENAPI_VERSION" | cut -d. -f2)
-
       # Validate input tag using semver CLI. Exit code is 0 for valid semver.
       if semver "$INPUT_TAG" > /dev/null 2>&1; then
         # Input tag is SemVer compliant, use it directly
         VERSION="$INPUT_TAG"
         echo "Input tag '$INPUT_TAG' is valid SemVer. Using version '$VERSION'."
-        # Let npm publish determine the tag (latest or pre-release tag)
+        # Let pnpm publish determine the tag (latest or pre-release tag)
         NPM_TAG_ARG=""
       else
         # Input tag is not SemVer, treat as branch/tag name
@@ -66,6 +62,9 @@ runs:
         # Sanitize the tag: replace non-alphanumeric/hyphen chars with hyphen
         SANITIZED_TAG=$(echo "$INPUT_TAG" | sed 's/[^a-zA-Z0-9-]/-/g')
         # Construct the version string: major.minor.0-tag.pipeline
+        # Extract major and minor parts
+        MAJOR=$(echo "$OPENAPI_VERSION" | cut -d. -f1)
+        MINOR=$(echo "$OPENAPI_VERSION" | cut -d. -f2)
         VERSION="${MAJOR}.${MINOR}.0-${SANITIZED_TAG}.${PIPELINE_ID}"
         echo "Generated version: $VERSION"
         # Explicitly publish with a tag derived from the sanitized input tag
@@ -81,7 +80,7 @@ runs:
       git config user.email "${GITHUB_ACTOR}@users.noreply.github.com"
       echo "Publishing to NPM version '$VERSION' with tag arguments: '$NPM_TAG_ARG'"
       # Note: The space before $NPM_TAG_ARG is important if it's non-empty
-      npm publish $NPM_TAG_ARG
+      pnpm publish $NPM_TAG_ARG
     shell: bash
     env:
-      GITHUB_TOKEN : ${{ env.GITHUB_TOKEN }}
+      GITHUB_TOKEN: ${{ env.GITHUB_TOKEN }}
