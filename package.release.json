@@ -4,7 +4,5 @@
   "types": "./index.d.ts",
   "sideEffects": false,
   "private": false,
-  "publishConfig": {
-    "access": "public"
-  }
+  "publishConfig": { "access": "public" }
 }

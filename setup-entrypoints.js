@@ -1,11 +1,12 @@
-'use strict';
+"use strict";
 
-import fs from 'fs';
-import yaml from 'js-yaml';
+import fs from "fs";
+import yaml from "js-yaml";
 
-const doc = yaml.load(fs.readFileSync('./openapi.yaml', 'utf8'));
+const doc = yaml.load(fs.readFileSync("./openapi.yaml", "utf8"));
 const tags = doc.tags.map((tag) => tag.name);
 
+console.log("Tags found in the OpenAPI document:");
 console.log(tags);
 
 tags.forEach((tag) => {

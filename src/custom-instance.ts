@@ -31,15 +31,13 @@ export const setBaseUrl = (baseUrl: string) => {
 
 export const customInstance = <TReturn>(
   config: AxiosRequestConfig,
-  options?: AxiosRequestConfig
+  options?: AxiosRequestConfig,
 ): Promise<TReturn> => {
   const source = Axios.CancelToken.source();
 
-  const promise = AXIOS_INSTANCE({
-    ...config,
-    ...options,
-    cancelToken: source.token,
-  }).then(({ data }) => data);
+  const promise = AXIOS_INSTANCE({ ...config, ...options, cancelToken: source.token }).then(
+    ({ data }) => data,
+  );
 
   // @ts-expect-error need to add a cancel method to the promise
   promise.cancel = () => {

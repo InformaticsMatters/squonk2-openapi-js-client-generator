@@ -15,7 +15,7 @@ The exports can be accessed as follows:
 ### From the primary entry-point `@org/service-client`:
 
 - The `customInstance` used to make calls is exported in the case where the exported API doesn't allow certain features.
-- *All* the exported types are only exported from here (limited by the output of orval but you should import types separately with `import type {} from ''` regardless).
+- _All_ the exported types are only exported from here (limited by the output of orval but you should import types separately with `import type {} from ''` regardless).
 
 ### From the sub-entry points, the `react-query` exports can be imported.
 
@@ -39,4 +39,3 @@ A GitHub action is provided that can be triggered with a `repository_dispatch`. 
 
 - [Data Manager Client](https://github.com/InformaticsMatters/data-manager-npm-client)
 - [Account Server Client](https://github.com/InformaticsMatters/account-server-js-client)
-
