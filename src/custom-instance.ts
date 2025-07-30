@@ -8,7 +8,7 @@
  * Or use 'ky'
  */
 
-import Axios, { AxiosError, AxiosRequestConfig } from 'axios';
+import Axios, { AxiosError, type AxiosRequestConfig } from "axios";
 
 export const AXIOS_INSTANCE = Axios.create();
 
@@ -18,7 +18,7 @@ export const AXIOS_INSTANCE = Axios.create();
  * @param token access token
  */
 export const setAuthToken = (token: string) => {
-  AXIOS_INSTANCE.defaults.headers.common['Authorization'] = `Bearer ${token}`;
+  AXIOS_INSTANCE.defaults.headers.common["Authorization"] = `Bearer ${token}`;
 };
 
 /**
@@ -31,17 +31,19 @@ export const setBaseUrl = (baseUrl: string) => {
 
 export const customInstance = <TReturn>(
   config: AxiosRequestConfig,
-  options?: AxiosRequestConfig,
+  options?: AxiosRequestConfig
 ): Promise<TReturn> => {
   const source = Axios.CancelToken.source();
 
-  const promise = AXIOS_INSTANCE({ ...config, ...options, cancelToken: source.token }).then(
-    ({ data }) => data,
-  );
+  const promise = AXIOS_INSTANCE({
+    ...config,
+    ...options,
+    cancelToken: source.token,
+  }).then(({ data }) => data);
 
   // @ts-expect-error need to add a cancel method to the promise
   promise.cancel = () => {
-    source.cancel('Query was cancelled');
+    source.cancel("Query was cancelled");
   };
 
   return promise;
