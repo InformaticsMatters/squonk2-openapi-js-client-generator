@@ -12,14 +12,14 @@ export default defineConfig({
       override: {
         operationName: (operation) => operation["x-semantic-name"],
         mutator: { path: "./src/custom-instance.ts", name: "customInstance" },
-        query: { useQuery: true, useSuspenseQuery: true },
+        query: {
+          useQuery: true,
+          useSuspenseQuery: true,
+          queryOptions: { path: "./src/options-mutator.ts", name: "queryMutator" },
+          mutationOptions: { path: "./src/options-mutator.ts", name: "mutationMutator" },
+        },
       },
     },
-    hooks: {
-      afterAllFilesWrite: [
-        { command: "node morph-query-keys.js API_TARGET_NAME", injectGeneratedDirsAndFiles: false },
-        { command: "prettier --ignore-path .prettierignore --write" },
-      ],
-    },
+    hooks: { afterAllFilesWrite: [{ command: "prettier --ignore-path .prettierignore --write" }] },
   },
 });

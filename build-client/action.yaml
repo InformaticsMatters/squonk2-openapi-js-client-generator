@@ -54,6 +54,7 @@ runs:
       sed -i s/'ORVAL_API_NAME'/'"'${{ inputs.API_NAME }}'"'/ orval.config.ts
       sed -i s/'API_TARGET_NAME'/''${{ inputs.API_TARGET_NAME }}''/ orval.config.ts
       sed -i s/'API_TARGET_NAME'/${{ inputs.API_TARGET_NAME }}/ src/index.ts
+      sed -i s/'API_TARGET_NAME'/${{ inputs.API_TARGET_NAME }}/ src/options-mutator.ts
     shell: bash
   # Run orval and tsup to build the client
   - run: |
