@@ -19,7 +19,7 @@
     "@typescript-eslint/eslint-plugin": "8.38.0",
     "axios": "1.10.0",
     "eslint": "8.57.0",
-    "eslint-plugin-prettier": "5.2.3",
+    "eslint-plugin-prettier": "5.5.3",
     "js-yaml": "4.1.0",
     "orval": "7.10.0",
     "prettier": "3.6.2",
