@@ -5,18 +5,22 @@ author: 'Oliver Dudgeon'
 runs:
   using: 'composite'
   steps:
+  # Set the NPm token for authentication
   - name: NPM Config
     run: pnpm config set //registry.npmjs.org/:_authToken $NPM_TOKEN
     env:
       NPM_TOKEN: ${{ env.NODE_AUTH_TOKEN }}
     shell: bash
+  # Install semver which is ued to validate the input tag
   - name: Install Semver CLI
     run: pnpm i -g semver
     shell: bash
+  # Merge the release config into the package.json
   - name: Prepare package.json
     run: |
       jq -s '.[0] * .[1]' package.json package.release.json | tee dist/package.json
     shell: bash
+  # Copy the required files to the dist directory which we publish
   - name: Prepare Build
     run: |
       cp client/README.md dist/README.md

@@ -39,17 +39,23 @@ runs:
       tail ${OPENAPI_FILE}
       cat ${OPENAPI_FILE} | wc -l
     shell: bash
+  # Merge the client package.json with the package.json from here, the result is written to package.json.tmp
   - run: jq -s '.[0] * .[1]' ./package.json ./client/package.json | tee package.json.tmp
     shell: bash
+  # This temp file is then used to create the new package.json
+  # This needs to be done in a separate step as to not read and write to the same file in one step
   - run: mv package.json.tmp package.json
     shell: bash
+  # Install dependencies
   - run: pnpm install
     shell: bash
+  # Generate the orval config by replacing the placeholders in the orval.config.ts file
   - run: |
       sed -i s/'ORVAL_API_NAME'/'"'${{ inputs.API_NAME }}'"'/ orval.config.ts
       sed -i s/'API_TARGET_NAME'/''${{ inputs.API_TARGET_NAME }}''/ orval.config.ts
       sed -i s/'API_TARGET_NAME'/${{ inputs.API_TARGET_NAME }}/ src/index.ts
     shell: bash
+  # Run orval and tsup to build the client
   - run: |
       pnpm orval
       pnpm build
