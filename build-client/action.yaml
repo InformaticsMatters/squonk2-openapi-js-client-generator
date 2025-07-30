@@ -52,8 +52,6 @@ runs:
     shell: bash
   - run: |
       pnpm orval
-      cat src/${{ inputs.API_TARGET_NAME }}.schemas.ts
-      node morph-query-keys.js ${{ inputs.API_TARGET_NAME }}
       pnpm build
       ls dist/
       node setup-entrypoints.js

@@ -12,7 +12,7 @@
   "type": "module",
   "scripts": {
     "orval": "orval",
-    "build": "tsup && node setup-entrypoints.js"
+    "build": "tsup"
   },
   "devDependencies": {
     "@tanstack/react-query": "5.83.0",
