@@ -22,16 +22,16 @@ runs:
       path: "./client"
   # Log the versions for debugging
   - run: |
-      echo "Using Node.js version: ${{ vars.NODE_JS_VERSION }}"
-      echo "Using pnpm version: ${{ vars.PNPM_VERSION }}"
+      echo "Using Node.js version: ${{ env.NODE_JS_VERSION }}"
+      echo "Using pnpm version: ${{ env.PNPM_VERSION }}"
     shell: bash
   - uses: actions/setup-node@v4
     with:
-      node-version: ${{ vars.NODE_JS_VERSION }}
+      node-version: ${{ env.NODE_JS_VERSION }}
   # Setup pnpm
   - uses: pnpm/action-setup@v4
     with:
-      version: ${{ vars.PNPM_VERSION }}
+      version: ${{ env.PNPM_VERSION }}
   # Get the openapi.yaml file
   - run: |
       echo "Fetching OpenAPI file from: ${GITLAB_API}/${GITLAB_PROJECT}/repository/files/${OPENAPI_PATH}%2F${OPENAPI_FILE}/raw?ref=${CI_COMMIT_TAG}"
