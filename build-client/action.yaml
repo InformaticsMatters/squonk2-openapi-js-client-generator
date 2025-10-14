@@ -25,7 +25,7 @@ runs:
       echo "Using Node.js version: ${{ env.NODE_JS_VERSION }}"
       echo "Using pnpm version: ${{ env.PNPM_VERSION }}"
     shell: bash
-  - uses: actions/setup-node@v4
+  - uses: actions/setup-node@v6
     with:
       node-version: ${{ env.NODE_JS_VERSION }}
   # Setup pnpm
