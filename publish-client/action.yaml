@@ -84,7 +84,7 @@ runs:
       git config user.email "${GITHUB_ACTOR}@users.noreply.github.com"
       echo "Publishing to NPM version '$VERSION' with tag arguments: '$NPM_TAG_ARG'"
       # Note: The space before $NPM_TAG_ARG is important if it's non-empty
-      pnpm publish $NPM_TAG_ARG
+      pnpm publish $NPM_TAG_ARG --no-git-checks
     shell: bash
     env:
       GITHUB_TOKEN: ${{ env.GITHUB_TOKEN }}
