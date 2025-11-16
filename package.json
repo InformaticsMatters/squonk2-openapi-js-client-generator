@@ -15,7 +15,7 @@
     "build": "tsup"
   },
   "devDependencies": {
-    "@tanstack/react-query": "5.83.0",
+    "@tanstack/react-query": "5.90.10",
     "@typescript-eslint/eslint-plugin": "8.38.0",
     "axios": "1.10.0",
     "js-yaml": "4.1.0",
