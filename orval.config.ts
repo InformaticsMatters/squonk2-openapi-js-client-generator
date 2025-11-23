@@ -1,14 +1,13 @@
 import { defineConfig } from "orval";
 
 export default defineConfig({
-  // ORVAL_API_NAME below is replaced in the action
-  ORVAL_API_NAME: {
+  api: {
     input: { target: "./openapi.yaml", validation: false },
     output: {
       mode: "tags-split",
-      // API_TARGET_NAME below is replaced in the action
-      target: "./src/API_TARGET_NAME.ts",
+      target: "./src/api/api.ts",
       client: "react-query",
+      baseUrl: "",
       override: {
         operationName: (operation) => operation["x-semantic-name"],
         mutator: { path: "./src/custom-instance.ts", name: "customInstance" },

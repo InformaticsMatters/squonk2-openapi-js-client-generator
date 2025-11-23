@@ -1,6 +1,6 @@
 {
   "version": "0.0.0",
-  "author": "Oliver Dudgeon",
+  "author": "Informatics Matters Ltd",
   "name": "@squonk/openapi-js-client-generator",
   "private": false,
   "repository": {
@@ -12,21 +12,25 @@
   "type": "module",
   "scripts": {
     "orval": "orval",
-    "build": "tsup"
+    "build": "tsdown"
   },
   "devDependencies": {
-    "@tanstack/react-query": "5.83.0",
-    "@typescript-eslint/eslint-plugin": "8.38.0",
-    "axios": "1.10.0",
-    "js-yaml": "4.1.0",
-    "orval": "7.10.0",
+    "@tanstack/react-query": "5.90.10",
+    "@typescript-eslint/eslint-plugin": "8.47.0",
+    "axios": "1.13.2",
+    "js-yaml": "4.1.1",
+    "orval": "7.16.1",
     "prettier": "3.6.2",
     "tslib": "2.8.1",
-    "tsup": "8.5.0",
-    "typescript": "5.8.3"
+    "tsdown": "^0.16.6",
+    "typescript": "5.9.3"
   },
   "peerDependencies": {
     "@tanstack/react-query": ">=4",
     "axios": ">=0.23"
+  },
+  "publishConfig": {
+    "sideEffects": false,
+    "access": "public"
   }
 }

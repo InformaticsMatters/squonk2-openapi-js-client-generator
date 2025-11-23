@@ -1,15 +1,11 @@
 !dist
-.eslintrc.json
-input-transformer.cjs
 openapi.yaml
 openapi.json
 
 *.log
 .DS_Store
 
-custom-instance.ts
-orval.config.ts
-setup.js
-tsup.config.ts
-.github
 .vscode
+.prettierrc
+.prettierignore
+renovate.json
