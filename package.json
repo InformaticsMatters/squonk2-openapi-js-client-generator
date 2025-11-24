@@ -15,9 +15,6 @@
     "build": "tsdown"
   },
   "devDependencies": {
-    "@tanstack/react-query": "5.90.10",
-    "@typescript-eslint/eslint-plugin": "8.47.0",
-    "axios": "1.13.2",
     "js-yaml": "4.1.1",
     "orval": "7.16.1",
     "prettier": "3.6.2",
