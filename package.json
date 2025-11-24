@@ -16,7 +16,7 @@
   },
   "devDependencies": {
     "js-yaml": "4.1.1",
-    "orval": "7.16.1",
+    "orval": "7.17.0",
     "prettier": "3.6.2",
     "tslib": "2.8.1",
     "tsdown": "^0.16.6",
