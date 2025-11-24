@@ -1,4 +1,0 @@
-onlyBuiltDependencies:
-  - '@asyncapi/specs'
-  - esbuild
-  - msw
