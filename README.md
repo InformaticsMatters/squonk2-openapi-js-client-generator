@@ -37,5 +37,5 @@ A GitHub action is provided that can be triggered with a `repository_dispatch`. 
 
 ## Current Clients
 
-- [Data Manager Client](https://github.com/InformaticsMatters/data-manager-npm-client)
-- [Account Server Client](https://github.com/InformaticsMatters/account-server-js-client)
+- [Data Manager Client](https://www.npmjs.com/package/@squonk/data-manager-client)
+- [Account Server Client](https://www.npmjs.com/package/@squonk/account-server-client)
