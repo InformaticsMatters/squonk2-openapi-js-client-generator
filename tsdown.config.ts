@@ -8,6 +8,7 @@ export default defineConfig({
   platform: "neutral",
   sourcemap: true,
   unbundle: true,
+  external: ["@tanstack/react-query", "axios"],
   exports: {
     customExports(pkg, context) {
       // Create simplified export paths for API modules (e.g., "./accounting" instead of "./api/accounting/accounting")
