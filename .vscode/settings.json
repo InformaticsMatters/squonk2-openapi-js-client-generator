@@ -10,7 +10,8 @@
     "custom-instance",
     "editor",
     "input-transformer",
-    "zod"
+    "zod",
+    "fetch"
   ],
   "cSpell.words": [
     "orval",

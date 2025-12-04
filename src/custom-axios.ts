@@ -32,19 +32,6 @@ export const setBaseUrl = (baseUrl: string) => {
 export const customInstance = <TReturn>(
   config: AxiosRequestConfig,
   options?: AxiosRequestConfig,
-): Promise<TReturn> => {
-  const source = Axios.CancelToken.source();
-
-  const promise = AXIOS_INSTANCE({ ...config, ...options, cancelToken: source.token }).then(
-    ({ data }) => data,
-  );
-
-  // @ts-expect-error need to add a cancel method to the promise
-  promise.cancel = () => {
-    source.cancel("Query was cancelled");
-  };
-
-  return promise;
-};
+): Promise<TReturn> => AXIOS_INSTANCE({ ...config, ...options }).then(({ data }) => data);
 
 export type ErrorType<TError> = AxiosError<TError>;

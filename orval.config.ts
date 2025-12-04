@@ -5,16 +5,39 @@ export default defineConfig({
     input: { target: "./openapi.yaml", validation: false },
     output: { client: "zod", mode: "tags-split", target: "./src/api", fileExtension: ".zod.ts" },
   },
-  api: {
+  fetch: {
+    input: { target: "./openapi.yaml", validation: false },
+    output: {
+      clean: true,
+      mode: "tags-split",
+      target: "./src/api",
+      schemas: "./src/api/api-schemas",
+      fileExtension: ".fetch.ts",
+      client: "react-query",
+      httpClient: "fetch",
+      override: {
+        operationName: (operation) => operation["x-semantic-name"],
+        mutator: { path: "./src/custom-fetch.ts", name: "customFetch" },
+        query: {
+          useQuery: true,
+          useSuspenseQuery: true,
+          useInvalidate: true,
+          shouldSplitQueryKey: true,
+        },
+      },
+    },
+  },
+  axios: {
     input: { target: "./openapi.yaml", validation: false },
     output: {
       mode: "tags-split",
-      target: "./src/api/api.ts",
+      target: "./src/api",
+      schemas: "./src/api/api-schemas",
       client: "react-query",
-      baseUrl: "",
+      httpClient: "axios",
       override: {
         operationName: (operation) => operation["x-semantic-name"],
-        mutator: { path: "./src/custom-instance.ts", name: "customInstance" },
+        mutator: { path: "./src/custom-axios.ts", name: "customInstance" },
         query: {
           useQuery: true,
           useSuspenseQuery: true,
