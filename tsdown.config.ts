@@ -1,14 +1,14 @@
 import { defineConfig } from "tsdown";
 
 export default defineConfig({
-  entry: ["src/index.ts", "src/api/*/*.ts"],
+  entry: ["src/index.ts", "src/api/*/*.ts", "src/api/*/*.zod.ts"],
   dts: true,
   format: ["cjs", "esm"],
   target: "es2022",
   platform: "neutral",
   sourcemap: true,
   unbundle: true,
-  external: ["@tanstack/react-query", "axios"],
+  external: ["@tanstack/react-query", "axios", "zod"],
   exports: {
     customExports(pkg, context) {
       // Create simplified export paths for API modules (e.g., "./accounting" instead of "./api/accounting/accounting")
@@ -23,7 +23,7 @@ export default defineConfig({
         if (chunks) {
           for (const chunk of chunks) {
             if (chunk.type === "chunk" && chunk.fileName) {
-              // Match pattern: api/{moduleName}/{moduleName}.js (or .cjs)
+              // Match pattern: api/{moduleName}/{moduleName}.js (or .cjs) and api/{moduleName}/{moduleName}.zod.js
               const match = chunk.fileName.match(/^api\/([^/]+)\/\1\.(js|cjs)$/);
               if (match && match[1]) {
                 modules.add(match[1]);
@@ -33,8 +33,9 @@ export default defineConfig({
         }
       }
 
-      // For each module, create a simplified export path
+      // For each module, create simplified export paths for both regular and zod files
       for (const moduleName of modules) {
+        // Regular exports
         pkg[`./${moduleName}`] = {
           import: {
             types: `./dist/api/${moduleName}/${moduleName}.d.ts`,
@@ -43,6 +44,18 @@ export default defineConfig({
           require: {
             types: `./dist/api/${moduleName}/${moduleName}.d.cts`,
             default: `./dist/api/${moduleName}/${moduleName}.cjs`,
+          },
+        };
+
+        // Zod exports
+        pkg[`./${moduleName}/zod`] = {
+          import: {
+            types: `./dist/api/${moduleName}/${moduleName}.zod.d.ts`,
+            default: `./dist/api/${moduleName}/${moduleName}.zod.js`,
+          },
+          require: {
+            types: `./dist/api/${moduleName}/${moduleName}.zod.d.cts`,
+            default: `./dist/api/${moduleName}/${moduleName}.zod.cjs`,
           },
         };
       }

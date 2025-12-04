@@ -9,7 +9,8 @@
     "readme",
     "custom-instance",
     "editor",
-    "input-transformer"
+    "input-transformer",
+    "zod"
   ],
   "cSpell.words": [
     "orval",

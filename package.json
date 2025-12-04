@@ -10,6 +10,10 @@
   "description": "TypeScript client for the Squonk OpenAPI files. Generated from the Open API spec with orval. Provides React Hooks to fetch data with react-query using Axios under-the-hood.",
   "license": "MIT",
   "type": "module",
+  "engines": {
+    "node": ">=20",
+    "npm": ">=7"
+  },
   "scripts": {
     "orval": "orval",
     "build": "tsdown"
@@ -22,11 +26,18 @@
     "ts-morph": "^27.0.2",
     "tsdown": "0.16.8",
     "tslib": "2.8.1",
-    "typescript": "5.9.3"
+    "typescript": "5.9.3",
+    "zod": "^4.1.13"
   },
   "peerDependencies": {
     "@tanstack/react-query": ">=4",
-    "axios": ">=0.23"
+    "axios": ">=0.23",
+    "zod": ">=4"
+  },
+  "peerDependenciesMeta": {
+    "zod": {
+      "optional": true
+    }
   },
   "publishConfig": {
     "sideEffects": false,

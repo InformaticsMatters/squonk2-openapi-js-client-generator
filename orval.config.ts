@@ -1,6 +1,10 @@
 import { defineConfig } from "orval";
 
 export default defineConfig({
+  zod: {
+    input: { target: "./openapi.yaml", validation: false },
+    output: { client: "zod", mode: "tags-split", target: "./src/api", fileExtension: ".zod.ts" },
+  },
   api: {
     input: { target: "./openapi.yaml", validation: false },
     output: {
@@ -25,7 +29,11 @@ export default defineConfig({
           command: "node --experimental-strip-types morph-query-keys.ts",
           injectGeneratedDirsAndFiles: false,
         },
-        { command: "prettier --ignore-path .prettierignore --write" },
+        {
+          // format all generated files at the end rather than after each client
+          command: "prettier --ignore-path .prettierignore --write src",
+          injectGeneratedDirsAndFiles: false,
+        },
       ],
     },
   },
