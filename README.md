@@ -2,38 +2,36 @@
 
 ## Generator
 
-Generate a React / TypeScript client from an OpenAPI file. [Orval](https://orval.dev) is used to generate a client from the tagged OpenAPI file. This is fully typed and provides functions to make API calls along with [react-query](https://react-query.tanstack.com/) hooks for _requests_ and _mutations_. Currently Axios is used to make calls but to support features such as Streams we might switch this in the future.
+Generate a React / TypeScript client from an OpenAPI file. [Orval](https://orval.dev) is used to generate a client from the tagged OpenAPI file. This is fully typed and provides functions to make API calls along with [@tanstack/react-query](https://tanstack.com/query) hooks for queries and mutations. Axios is used to make HTTP calls.
 
-The `operationId`s can be replaced with more useful names by specifying a `x-sematic-name` field along side the `operationId`. These no longer need to be globally unique but still need to be within a `tag` to avoid a name clash.
+The `operationId`s can be replaced with more useful names by specifying an `x-semantic-name` field alongside the `operationId`. These no longer need to be globally unique (like the operationId does) but still need to be unique within a `tag` to avoid name clashes.
 
 ## Build
 
-The source client is then built using [tsup](https://tsup.egoist.sh/). Both CommonJS and ESM outputs are provided. To allow efficient tree-shaking and bundling, each `tag` from the OpenAPI file is provided in its own submodule as its own entry-point.
+The source client is built using [tsdown](https://tsdown.dev). Both CommonJS and ESM outputs are provided. To allow efficient tree-shaking and bundling, each `tag` from the OpenAPI file is provided in its own submodule as its own entry-point.
 
-The exports can be accessed as follows:
+## Query Key Prefixing
 
-### From the primary entry-point `@org/service-client`:
+To prevent cache collisions when multiple API clients are used in the same application, query keys are automatically prefixed with the API name. This is handled by a post-processing script (`morph-query-keys.ts`) that runs after code generation. The prefix is extracted from the package name (e.g., `@squonk/account-server-client` → `"account-server"`).
 
-- The `customInstance` used to make calls is exported in the case where the exported API doesn't allow certain features.
-- _All_ the exported types are only exported from here (limited by the output of orval but you should import types separately with `import type {} from ''` regardless).
+## Package Structure
 
-### From the sub-entry points, the `react-query` exports can be imported.
+### Primary entry-point `@org/service-client`:
 
-This will be the standard output of `Orval` with `react-query` These will be the `x-semantic-name` fields specified in the OpenAPI. In addition the hooks will of course be prefixed by `use` and converted to `camelCase`. Each `useQuery` hook will also have a `get${camelCase(operationId)}` function that takes the same request params and body to generate a query key. Additionally, suspense queries are generated for `<Suspense></Suspense>` boundaries.
+- The `customInstance` used to make calls is exported for cases where the generated API doesn't provide certain features.
+- All TypeScript types generated from the OpenAPI spec are exported from here. Import types separately using `import type {} from '@squonk/service-client'`.
 
-## Docs
+### Sub-entry points (e.g., `@squonk/service-client/accounting`):
 
-Docs can also be generated with [typedoc](https://typedoc.org/). The `./setup-typedoc.js` script will setup a `typedoc.json` configuration with the entry-points generated from the OpenAPI tags.
+Each OpenAPI tag is available as a submodule, exporting:
 
-## GitHub Action
+- **Query hooks**: `use{OperationName}` (e.g., `useGetAccountServerNamespace`) with prefixed query keys
+- **Suspense query hooks**: `use{OperationName}SuspenseQuery` for use with React `<Suspense>` boundaries
+- **Mutation hooks**: `use{OperationName}` for POST/PUT/DELETE operations
+- **Query key helpers**: `get{OperationName}QueryKey()` returns the prefixed query key used by the hook (e.g., `["account-server", "getAccountServerNamespace"]`)
+- **Invalidate helpers**: `useInvalidate{OperationName}()` returns a function to invalidate the query cache
 
-A GitHub action is provided that can be triggered with a `repository_dispatch`. This will fetch the OpenAPI file from GitLab then:
-
-1. Generate a client
-2. Build the client
-3. Publish the client to NPM and crate a GitHub release
-4. Generate docs from the generated client
-5. Publish these docs to a branch called `gh-pages` for deployment on GitHub Pages
+Operation names come from the `x-semantic-name` fields specified in the OpenAPI spec.
 
 ## Current Clients
 

@@ -14,11 +14,19 @@ export default defineConfig({
         query: {
           useQuery: true,
           useSuspenseQuery: true,
-          queryOptions: { path: "./src/options-mutator.ts", name: "queryMutator" },
-          mutationOptions: { path: "./src/options-mutator.ts", name: "mutationMutator" },
+          useInvalidate: true,
+          shouldSplitQueryKey: true,
         },
       },
     },
-    hooks: { afterAllFilesWrite: [{ command: "prettier --ignore-path .prettierignore --write" }] },
+    hooks: {
+      afterAllFilesWrite: [
+        {
+          command: "node --experimental-strip-types morph-query-keys.ts",
+          injectGeneratedDirsAndFiles: false,
+        },
+        { command: "prettier --ignore-path .prettierignore --write" },
+      ],
+    },
   },
 });
