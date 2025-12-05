@@ -11,15 +11,17 @@
   "license": "MIT",
   "type": "module",
   "engines": {
-    "node": ">=20",
-    "npm": ">=7"
+    "node": ">=22",
+    "pnpm": ">=8"
   },
   "scripts": {
     "orval": "orval",
-    "build": "tsdown"
+    "build": "tsdown",
+    "test": "tsc --noEmit -p tests/tsconfig.json"
   },
   "devDependencies": {
     "@types/node": "^24.10.1",
+    "@types/react": "^19.2.7",
     "js-yaml": "4.1.1",
     "orval": "7.17.0",
     "prettier": "3.7.3",
