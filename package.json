@@ -25,7 +25,7 @@
     "js-yaml": "4.1.1",
     "orval": "7.21.0",
     "prettier": "3.7.3",
-    "ts-morph": "27.0.2",
+    "ts-morph": "28.0.0",
     "tsdown": "0.16.8",
     "tslib": "2.8.1",
     "typescript": "5.9.3",
