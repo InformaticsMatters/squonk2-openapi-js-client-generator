@@ -3,7 +3,7 @@
   "extends": [":disableRateLimiting", "config:js-app", ":semanticCommitTypeAll(chore)"],
   "labels": ["dependencies"],
   "constraints": {
-    "pnpm": "10"
+    "pnpm": "10.33.4"
   },
   "minimumReleaseAge": "2 days"
 }
