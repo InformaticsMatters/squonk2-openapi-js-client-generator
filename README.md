@@ -1,4 +1,4 @@
-# Action to Generate and Publish a TS Client & Docs from an OpenAPI File
+# Package to Generate and Publish a TS Client & Docs from an OpenAPI File
 
 ## Generator
 
