@@ -2,11 +2,11 @@ import { defineConfig } from "orval";
 
 export default defineConfig({
   zod: {
-    input: { target: "./openapi.yaml", validation: false },
+    input: { target: "./openapi.yaml", unsafeDisableValidation: true },
     output: { client: "zod", mode: "tags-split", target: "./src/api", fileExtension: ".zod.ts" },
   },
   fetch: {
-    input: { target: "./openapi.yaml", validation: false },
+    input: { target: "./openapi.yaml", unsafeDisableValidation: true },
     output: {
       clean: true,
       mode: "tags-split",
@@ -28,7 +28,7 @@ export default defineConfig({
     },
   },
   axios: {
-    input: { target: "./openapi.yaml", validation: false },
+    input: { target: "./openapi.yaml", unsafeDisableValidation: true },
     output: {
       mode: "tags-split",
       target: "./src/api",
