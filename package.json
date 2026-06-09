@@ -12,7 +12,7 @@
   "type": "module",
   "engines": {
     "node": ">=22",
-    "pnpm": ">=8"
+    "pnpm": ">=11"
   },
   "scripts": {
     "orval": "orval",
