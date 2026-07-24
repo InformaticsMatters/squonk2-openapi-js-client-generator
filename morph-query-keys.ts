@@ -20,7 +20,8 @@ const maxParts = Math.max(...project.getSourceFiles().map(getNumberOfParts));
 // Extract API name from package.json
 const packageJson = JSON.parse(readFileSync("./package.json", "utf-8")) as { name: string };
 // e.g., "@squonk/account-server-client" -> "account-server"
-const apiName = packageJson.name.replace(/^@[^/]+\//, "").replace(/-client$/, "");
+const packageApiName = packageJson.name.replace(/^@[^/]+\//, "").replace(/-client$/, "");
+const apiName = process.env.CLIENT_API_NAME || packageApiName;
 
 for (const apiFile of project.getSourceFiles()) {
   const fullText = apiFile.getFullText();

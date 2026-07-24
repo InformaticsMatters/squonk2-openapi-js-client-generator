@@ -1,12 +1,14 @@
 import { defineConfig } from "orval";
 
+const openapiInput = process.env.OPENAPI_INPUT || "./openapi.yaml";
+
 export default defineConfig({
   zod: {
-    input: { target: "./openapi.yaml", unsafeDisableValidation: true },
+    input: { target: openapiInput, unsafeDisableValidation: true },
     output: { client: "zod", mode: "tags-split", target: "./src/api", fileExtension: ".zod.ts" },
   },
   fetch: {
-    input: { target: "./openapi.yaml", unsafeDisableValidation: true },
+    input: { target: openapiInput, unsafeDisableValidation: true },
     output: {
       clean: true,
       mode: "tags-split",
@@ -18,17 +20,13 @@ export default defineConfig({
       override: {
         operationName: (operation) => operation["x-semantic-name"],
         mutator: { path: "./src/custom-fetch.ts", name: "customFetch" },
-        query: {
-          useQuery: true,
-          useSuspenseQuery: true,
-          useInvalidate: true,
-          shouldSplitQueryKey: true,
-        },
+        aliasCombinedTypes: false,
+        query: { useSuspenseQuery: true, useInvalidate: true, shouldSplitQueryKey: true },
       },
     },
   },
   axios: {
-    input: { target: "./openapi.yaml", unsafeDisableValidation: true },
+    input: { target: openapiInput, unsafeDisableValidation: true },
     output: {
       mode: "tags-split",
       target: "./src/api",
@@ -38,12 +36,8 @@ export default defineConfig({
       override: {
         operationName: (operation) => operation["x-semantic-name"],
         mutator: { path: "./src/custom-axios.ts", name: "customInstance" },
-        query: {
-          useQuery: true,
-          useSuspenseQuery: true,
-          useInvalidate: true,
-          shouldSplitQueryKey: true,
-        },
+        aliasCombinedTypes: false,
+        query: { useSuspenseQuery: true, useInvalidate: true, shouldSplitQueryKey: true },
       },
     },
     hooks: {
