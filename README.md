@@ -10,9 +10,56 @@ The `operationId`s can be replaced with more useful names by specifying an `x-se
 
 The source client is built using [tsdown](https://tsdown.dev). Both CommonJS and ESM outputs are provided. To allow efficient tree-shaking and bundling, each `tag` from the OpenAPI file is provided in its own submodule as its own entry-point.
 
+## Usage
+
+The generator supports two equivalent workflows.
+
+`OPENAPI_INPUT` only selects the OpenAPI file to read. It does not change where files are written. Generation output is always relative to the current working package:
+
+- `pnpm orval` writes generated source to `./src/api`.
+- `pnpm build` writes the built package to `./dist` and updates `package.json` exports.
+
+To generate a client in a different package directory, run these commands from that package directory after copying or sharing this generator template there.
+
+### Copy or Download the OpenAPI File
+
+Copy or download the OpenAPI file to `openapi.yaml` in the package root, update `package.json` metadata as needed, then generate and build the package.
+
+```bash
+cp /path/to/openapi.yaml openapi.yaml
+pnpm orval
+pnpm build
+```
+
+This workflow is useful in CI, where the generator can be cloned into a clean build directory and package metadata can be set before publishing.
+
+### Provide the OpenAPI File Path
+
+Set `OPENAPI_INPUT` to generate from an OpenAPI file without copying it to `openapi.yaml`.
+
+```bash
+OPENAPI_INPUT=/path/to/openapi.yaml pnpm orval
+pnpm build
+```
+
+Package metadata is still read from `package.json`. To generate a package for a specific client, update `package.json` before running `pnpm build`.
+
+For example, from a prepared local client package:
+
+```bash
+cd libs/account-server-client
+OPENAPI_INPUT=./openapi.yaml pnpm orval
+pnpm build
+```
+
+### Environment Variables
+
+- `OPENAPI_INPUT`: OpenAPI file path. Defaults to `./openapi.yaml`.
+- `CLIENT_API_NAME`: query-key prefix. Defaults to the package name without scope and `-client` suffix, for example `@squonk/account-server-client` becomes `account-server`.
+
 ## Query Key Prefixing
 
-To prevent cache collisions when multiple API clients are used in the same application, query keys are automatically prefixed with the API name. This is handled by a post-processing script (`morph-query-keys.ts`) that runs after code generation. The prefix is extracted from the package name (e.g., `@squonk/account-server-client` → `"account-server"`).
+To prevent cache collisions when multiple API clients are used in the same application, query keys are automatically prefixed with the API name. This is handled by a post-processing script (`morph-query-keys.ts`) that runs after code generation. By default, the prefix is extracted from the package name (e.g., `@squonk/account-server-client` -> `"account-server"`). Set `CLIENT_API_NAME` to override it.
 
 ## Package Structure
 
