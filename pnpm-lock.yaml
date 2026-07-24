@@ -10,10 +10,10 @@ importers:
     dependencies:
       '@tanstack/react-query':
         specifier: '>=5'
-        version: 5.101.0(react@19.2.7)
+        version: 5.101.0(react@19.2.6)
       axios:
         specifier: '>=0.23'
-        version: 1.17.0
+        version: 1.17.0(debug@4.4.3)
     devDependencies:
       '@types/node':
         specifier: 24.10.1
@@ -30,6 +30,9 @@ importers:
       prettier:
         specifier: 3.8.3
         version: 3.8.3
+      react:
+        specifier: 19.2.6
+        version: 19.2.6
       ts-morph:
         specifier: 28.0.0
         version: 28.0.0
@@ -893,8 +896,8 @@ packages:
   quansync@1.0.0:
     resolution: {integrity: sha512-5xZacEEufv3HSTPQuchrvV6soaiACMFnq1H8wkVioctoH3TRha9Sz66lOxRwPK/qZj7HPiSveih9yAyh98gvqA==}
 
-  react@19.2.7:
-    resolution: {integrity: sha512-HNe9WslTbXmFK8o8cmwgAeJFSBvt1bPdHCVKtaaV+WlAN36mpT4hcRpwbf3fY56ar2oIXzsBpOAiIRHAdY0OlQ==}
+  react@19.2.6:
+    resolution: {integrity: sha512-sfWGGfavi0xr8Pg0sVsyHMAOziVYKgPLNrS7ig+ivMNb3wbCBw3KxtflsGBAwD3gYQlE/AEZsTLgToRrSCjb0Q==}
     engines: {node: '>=0.10.0'}
 
   readdirp@5.0.0:
@@ -1456,10 +1459,10 @@ snapshots:
 
   '@tanstack/query-core@5.101.0': {}
 
-  '@tanstack/react-query@5.101.0(react@19.2.7)':
+  '@tanstack/react-query@5.101.0(react@19.2.6)':
     dependencies:
       '@tanstack/query-core': 5.101.0
-      react: 19.2.7
+      react: 19.2.6
 
   '@ts-morph/common@0.29.0':
     dependencies:
@@ -1525,9 +1528,9 @@ snapshots:
 
   asynckit@0.4.0: {}
 
-  axios@1.17.0:
+  axios@1.17.0(debug@4.4.3):
     dependencies:
-      follow-redirects: 1.16.0
+      follow-redirects: 1.16.0(debug@4.4.3)
       form-data: 4.0.5
       https-proxy-agent: 5.0.1
       proxy-from-env: 2.1.0
@@ -1674,7 +1677,9 @@ snapshots:
       locate-path: 8.0.0
       unicorn-magic: 0.3.0
 
-  follow-redirects@1.16.0: {}
+  follow-redirects@1.16.0(debug@4.4.3):
+    optionalDependencies:
+      debug: 4.4.3
 
   form-data@4.0.5:
     dependencies:
@@ -1894,7 +1899,7 @@ snapshots:
 
   quansync@1.0.0: {}
 
-  react@19.2.7: {}
+  react@19.2.6: {}
 
   readdirp@5.0.0: {}
 
