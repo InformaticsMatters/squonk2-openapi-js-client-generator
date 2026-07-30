@@ -20,7 +20,7 @@
     "test": "tsc --noEmit -p tests/tsconfig.json"
   },
   "devDependencies": {
-    "@types/node": "24.10.1",
+    "@types/node": "24.13.3",
     "@types/react": "19.2.17",
     "js-yaml": "4.1.1",
     "orval": "8.22.0",
