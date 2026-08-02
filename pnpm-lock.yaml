@@ -13,7 +13,7 @@ importers:
         version: 5.101.0(react@19.2.6)
       axios:
         specifier: '>=0.23'
-        version: 1.17.0(debug@4.4.3)
+        version: 1.17.0
     devDependencies:
       '@types/node':
         specifier: 24.10.1
@@ -22,8 +22,8 @@ importers:
         specifier: 19.2.17
         version: 19.2.17
       js-yaml:
-        specifier: 4.1.1
-        version: 4.1.1
+        specifier: 5.2.3
+        version: 5.2.3
       orval:
         specifier: 8.22.0
         version: 8.22.0(prettier@3.8.3)(typescript@6.0.3)
@@ -765,12 +765,12 @@ packages:
     resolution: {integrity: sha512-AC/7JofJvZGrrneWNaEnJeOLUx+JlGt7tNa0wZiRPT4MY1wmfKjt2+6O2p2uz2+skll8OZZmJMNqeke7kKbNgQ==}
     hasBin: true
 
-  js-yaml@4.1.1:
-    resolution: {integrity: sha512-qQKT4zQxXl8lLwBtHMWwaTcGfFOZviOJet3Oy/xmGk2gZH677CJM9EvtfdSkgWcATZhj/55JZ0rmy3myCT5lsA==}
-    hasBin: true
-
   js-yaml@4.2.0:
     resolution: {integrity: sha512-ePWsvanv0DWuDRsW8dnt+R4jQ31SCRCQ7hhNcPXZPsoBZiemuZNYGf7adZdqX2D86j6rvKp3RpCxVTSb8WQlOw==}
+    hasBin: true
+
+  js-yaml@5.2.3:
+    resolution: {integrity: sha512-n+mUVyUX5bVv7G/G2zyIHOhdxfuU1dY2NOFzTQUWiMUbFss8b57NFlgCCaggU78wSw5KVS9cllzeLyzyR+n5nw==}
     hasBin: true
 
   jsesc@3.1.0:
@@ -1528,9 +1528,9 @@ snapshots:
 
   asynckit@0.4.0: {}
 
-  axios@1.17.0(debug@4.4.3):
+  axios@1.17.0:
     dependencies:
-      follow-redirects: 1.16.0(debug@4.4.3)
+      follow-redirects: 1.16.0
       form-data: 4.0.5
       https-proxy-agent: 5.0.1
       proxy-from-env: 2.1.0
@@ -1677,9 +1677,7 @@ snapshots:
       locate-path: 8.0.0
       unicorn-magic: 0.3.0
 
-  follow-redirects@1.16.0(debug@4.4.3):
-    optionalDependencies:
-      debug: 4.4.3
+  follow-redirects@1.16.0: {}
 
   form-data@4.0.5:
     dependencies:
@@ -1765,11 +1763,11 @@ snapshots:
 
   jiti@2.7.0: {}
 
-  js-yaml@4.1.1:
+  js-yaml@4.2.0:
     dependencies:
       argparse: 2.0.1
 
-  js-yaml@4.2.0:
+  js-yaml@5.2.3:
     dependencies:
       argparse: 2.0.1
 
