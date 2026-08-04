@@ -2,6 +2,6 @@
   "$schema": "https://docs.renovatebot.com/renovate-schema.json",
   "extends": [":disableRateLimiting", "config:js-app", ":semanticCommitTypeAll(chore)"],
   "labels": ["dependencies"],
-  "constraints": { "node": "24", "pnpm": "11.2.2" },
+  "constraints": { "node": "24.19.0", "pnpm": "11.2.2" },
   "minimumReleaseAge": "1 days"
 }
